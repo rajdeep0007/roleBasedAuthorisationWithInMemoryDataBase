@@ -108,6 +108,39 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .role(user.getRole())
                 .build();
     }
-}
 
 2)we need to enable or plug this to our security config for which we need a bean of DaoAuthenticationProvider
+
+@Bean
+public DaoAuthenticationProvider daoAuthenticationProvider(CustomUserDetailsService userDetailsService) {
+    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    provider.setUserDetailsService(userDetailsService);
+    provider.setPasswordEncoder(passwordEncoder());
+    return provider;
+}
+
+3)learn about the concept of @EventLister using which we are able to delete all data from the table on startup
+
+@Component
+public class StartupDataCleaner {
+
+    private final UserRepository userRepository;
+
+    public StartupDataCleaner(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void clearTableOnStartup() {
+        userRepository.deleteAll();
+        System.out.println("✅ Table cleared at application startup.");
+    }
+}
+
+4) the request payload to create Admin user is
+{
+    "username":"Rajdeep",
+    "password":"rajdeep",
+    "email":"rajdeep@gmail.com",
+    "role":"ROLE_ADMIN"
+}
