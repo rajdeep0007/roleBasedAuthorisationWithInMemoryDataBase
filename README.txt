@@ -84,3 +84,30 @@ Now the repsonse will look somethign like below
 Spring Security's default httpBasic() interfering
 If you're using JWT or a custom auth mechanism, calling .httpBasic() may override or bypass your
 AuthenticationEntryPoint and hence we might not get better response
+
+-----------------------------------------------------------------------------------------------------------------------
+USING CUSTOMUSERDETAILSERVICE INSTEAD OF INMEMORYDB
+-----------------------------------------------------------------------------------------------------------------------
+
+1) replace InMemoryDB with your customuserdetailservice by using the below code
+
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        return User.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .role(user.getRole())
+                .build();
+    }
+}
+
+2)we need to enable or plug this to our security config for which we need a bean of DaoAuthenticationProvider
