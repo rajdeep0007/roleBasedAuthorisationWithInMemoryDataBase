@@ -1,5 +1,7 @@
 package com.example.jwtdemo.config;
 
+import com.example.jwtdemo.handler.CustomAccessDeniedHandler;
+import com.example.jwtdemo.handler.CustomAuthEntryPoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.Customizer;
@@ -20,9 +22,15 @@ import org.springframework.stereotype.Component;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
+                                                   CustomAccessDeniedHandler customAccessDeniedHandler,
+                                                   CustomAuthEntryPoint authEntryPoint) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
+                .exceptionHandling(e -> e
+                        .accessDeniedHandler(customAccessDeniedHandler)
+                        .authenticationEntryPoint(authEntryPoint)
+                )
                 .authorizeHttpRequests(request ->
                         request.requestMatchers("/public/healthCheck", "/error").permitAll()
                                 .requestMatchers("/admin/healthCheck").hasRole("ADMIN")
@@ -43,7 +51,7 @@ public class SecurityConfig {
                 .password(passwordEncoder().encode("user123"))
                 .roles("USER")
                 .build();
-        return new InMemoryUserDetailsManager(adminUser,normalUser);
+        return new InMemoryUserDetailsManager(adminUser, normalUser);
     }
 
     @Bean

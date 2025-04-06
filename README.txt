@@ -44,3 +44,43 @@ public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws
             .httpBasic(Customizer.withDefaults())
             .build();
 }
+
+4) in case of incorrect authorisation we get something like below in the client
+{
+    "timestamp": "2025-04-06T19:39:35.242+00:00",
+    "status": 403,
+    "error": "Forbidden",
+    "path": "/admin/healthCheck"
+}
+
+In order to have better response, we need to implement the below
+
+@Component
+public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
+
+@Override
+public void handle(HttpServletRequest request,
+                   HttpServletResponse response,
+                   AccessDeniedException accessDeniedException) throws IOException {
+    response.setContentType("application/json");
+    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+    response.getWriter().write("{ \"error\": \"Forbidden\", \"message\": \"Access denied\" }");
+}
+
+In order to activate this, we need to add the configuration and the security config file
+
+.exceptionHandling(e -> e
+                    .authenticationEntryPoint(authEntryPoint)
+                    .accessDeniedHandler(accessDeniedHandler)
+            )
+
+Now the repsonse will look somethign like below
+{
+    "error": "Forbidden",
+    "message": "Access denied"
+}
+
+5) similarly, in case of incorrect credentials when we get 401 we can have better response BUT
+Spring Security's default httpBasic() interfering
+If you're using JWT or a custom auth mechanism, calling .httpBasic() may override or bypass your
+AuthenticationEntryPoint and hence we might not get better response
