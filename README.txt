@@ -1,6 +1,6 @@
 Steps:
 
-1) initially if we Are bringing in the dependency of spring security the very first time if we start the application,
+1) initially, if we are bringing in the dependency of spring security, the very first time we start the application,
 we can see password getting generated in the console.
 By default, Spring configures , a user whose name is "user" and password is what we find in the console and the role is also "ROLE_USER"
 This configuration is saved in the in memory database
@@ -44,5 +44,3 @@ public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws
             .httpBasic(Customizer.withDefaults())
             .build();
 }
-
-4)
