@@ -27,6 +27,41 @@
 			"response": []
 		},
 		{
+			"name": "user Health Check",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "User",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/healthCheck",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"healthCheck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Admin Health Check",
 			"request": {
 				"method": "POST",
@@ -56,13 +91,13 @@
 			"response": []
 		},
 		{
-			"name": "New User Creation",
+			"name": "New ADMIN User Creation",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"userName\":\"Rajdeep\",\n    \"password\":\"rajdeep\",\n    \"email\":\"rajdeep@gmail.com\",\n    \"role\":\"ROLE_ADMIN\"\n}",
+					"raw": "{\n    \"username\":\"Rajdeep\",\n    \"password\":\"rajdeep\",\n    \"email\":\"rajdeep@gmail.com\",\n    \"role\":\"ROLE_ADMIN\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -70,16 +105,44 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/auth/signup",
+					"raw": "http://localhost:8080/admin/addUser",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
-						"auth",
-						"signup"
+						"admin",
+						"addUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New REGULAR User Creation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"Rajdeep\",\n    \"password\":\"rajdeep\",\n    \"email\":\"rajdeep@gmail.com\",\n    \"role\":\"ROLE_ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/addUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"addUser"
 					]
 				}
 			},

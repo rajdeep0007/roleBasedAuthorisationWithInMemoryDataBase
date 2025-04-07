@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request ->
                         request.requestMatchers("/public/healthCheck", "/error","/admin/addUser").permitAll()
                                 .requestMatchers("/admin/healthCheck").hasRole("ADMIN")
+                                .requestMatchers("/user/healthCheck").hasRole("USER")
                                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .build();
