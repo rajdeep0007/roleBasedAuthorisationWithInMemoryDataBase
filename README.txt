@@ -1,9 +1,25 @@
+-----------------------------------------------------------------------------------------------------------------------
+DESCRIPTION
+-----------------------------------------------------------------------------------------------------------------------
+THIS REPOSITORY CONTAIN MULTIPLE IMPLEMENTATION IN DIFFERENT BRANCHES
+
+1)feature/roleBasedUsingInMemoryDB = IN THIS BRANCH, I HAVE TRIED TO IMPLEMENT ROLE-BASED AUTHORISATION FOR A PARTICULAR, ENDPOINT BY USING IN MEMORY DATABASE.
+THE OVERALL DETAILS COULD BE FOUND BELOW BECAUSE THIS IS THE POINT WHERE I STARTED CREATING THE PROJECT
+
+2)feature/roleBasedUsingCustomUserDB = IN THIS BRANCH, I HAVE TRIED TO IMPLEMENT ROLE-BASED AUTHORISATION BY USING CUSTOM DATABASE.
+ THE OVERALL DETAILS FOR THE SAME CAN BE AGAIN FOUND BELOW IN OTHER STEPS.
+
+3)feature/JWTImpl = IN THIS BRANCH AFTER I HAVE COMPLETED ABOVE TWO IMPLEMENTATIONS, I HAVE TRIED TO IMPLEMENT THE
+SAME THING USING JWT FOR A PARTICULAR ENDPOINT
+
+-----------------------------------------------------------------------------------------------------------------------
 Note :
+-----------------------------------------------------------------------------------------------------------------------
 1) since we are clearing the DB , so please ensure to create a user else it will throw 401 with Bad credentials.
 ( this is in TO DO )
-2) the name of the project has jwtdemo , but this is also in progress
+-----------------------------------------------------------------------------------------------------------------------
 
-Steps:
+Steps A :
 
 1) initially, if we are bringing in the dependency of spring security, the very first time we start the application,
 we can see password getting generated in the console.
