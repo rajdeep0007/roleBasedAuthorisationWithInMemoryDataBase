@@ -1,3 +1,8 @@
+Note :
+1) since we are clearing the DB , so please ensure to create a user else it will throw 401 with Bad credentials.
+( this is in TO DO )
+2) the name of the project has jwtdemo , but this is also in progress
+
 Steps:
 
 1) initially, if we are bringing in the dependency of spring security, the very first time we start the application,

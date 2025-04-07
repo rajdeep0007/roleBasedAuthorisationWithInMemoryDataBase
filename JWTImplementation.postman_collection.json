@@ -8,32 +8,19 @@
 	"item": [
 		{
 			"name": "public Health Check",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"userName\":\"Rajdeep\",\n    \"password\":\"rajdeep\",\n    \"email\":\"rajdeep@gmail.com\",\n    \"role\":\"ROLE_ADMIN\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:8080/api/auth/login",
+					"raw": "http://localhost:8080/public/healthCheck",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
-						"auth",
-						"login"
+						"public",
+						"healthCheck"
 					]
 				}
 			},
